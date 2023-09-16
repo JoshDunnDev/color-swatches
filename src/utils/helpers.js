@@ -20,7 +20,7 @@ export const getBatches = ({ saturation, lightness }) => {
     batches.push([promise]);
   } else {
     // Generate promises for each hue value
-    for (let hue = 0; hue < HUE_MAX; hue++) {
+    for (let hue = 0; hue <= HUE_MAX; hue++) {
       const promise = axios.get(createUrl(hue, saturation, lightness));
       promiseArr.push(promise);
 
@@ -28,6 +28,11 @@ export const getBatches = ({ saturation, lightness }) => {
       if (promiseArr.length === BATCH_SIZE) {
         batches.push(promiseArr);
         promiseArr = [];
+      }
+
+      // Add last single hue to last batch
+      if (hue === HUE_MAX) {
+        batches[batches.length - 1].push(promise);
       }
     }
   }
