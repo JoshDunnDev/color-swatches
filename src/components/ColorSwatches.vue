@@ -30,7 +30,6 @@ import Swatch from "./Swatch";
 import Inputs from "./Inputs";
 import ProgressBar from "./ProgressBar";
 import { getBatches } from "../utils/helpers";
-import { debounce } from "lodash";
 
 export default {
   name: "ColorSwatches",
